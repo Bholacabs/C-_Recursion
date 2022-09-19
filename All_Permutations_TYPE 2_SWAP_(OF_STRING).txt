@@ -1,0 +1,47 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+void allpermut(int i, char inp[], int n)
+{
+    if(i>=n)
+    {
+        for(int k=0;k<n;k++)
+        {
+            cout<<inp[k]<<" ";
+        }
+        cout<<endl;
+        return;
+    }
+    
+    for(int j=i;j<n;j++)
+    {
+        swap(inp[i],inp[j]);
+        allpermut(i+1,inp,n);
+        swap(inp[i],inp[j]);
+    }
+}
+
+int main()
+{
+    string st;
+    cin>>st;
+    int n=st.length();
+    char inp[n+1];
+    for(int i=0;i<n;i++)
+    {
+        inp[i]=st[i];
+    }
+    inp[n]='\0';
+    int i=0;
+    cout<<endl;
+    
+    allpermut(0,inp,n);
+    
+    return 0;
+}
+
+
+
+
+

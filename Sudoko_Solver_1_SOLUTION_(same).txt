@@ -1,0 +1,119 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+bool fillblank(int k, vector<string> inp, int n, int i, int j)
+{
+    //checking column
+    char ch=k+'0';
+    for(int row=0;row<n;row++)
+    {
+        if(inp[row][j]==ch)
+        {
+            return false;
+        }
+    }
+    //checking row
+    for(int col=0;col<n;col++)
+    {
+        if(inp[i][col]==ch)
+        {
+            return false;
+        }
+    }
+    //checking box
+    int row,col;
+    if(i>=n/3)
+    {
+        row=i-i%3;
+    }
+    else
+    {
+        row=0;   
+    }
+    if(j>=n/3)
+    {
+        col=j-j%3;
+    }
+    else
+    {
+        col=0;
+    }
+    for(int p=row;p<row+3;p++)
+    {
+        for(int q=col;q<col+3;q++)
+        {
+            if(inp[p][q]==ch)
+            {
+                return false;
+            }
+        }
+    }
+    
+    return true;
+}
+
+bool sudokosolver(int n, vector<string> &inp)
+{
+    
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            if(inp[i][j]=='.')
+            {
+                for(int k=1;k<=n;k++)
+                {
+                    if( fillblank(k,inp,n,i,j) )
+                    {
+                        char ch=k+'0';
+                        inp[i][j]=ch;
+                        if(sudokosolver(n,inp))
+                        return true;
+                        
+                        else
+                        inp[i][j]='.';
+                    }
+                }
+                
+                return false;
+            }
+        }
+    }
+    
+    return true;
+}
+
+int main()
+{
+    //int n;
+    //cin>>n;
+    int n=9;
+    vector<string> inp;
+    string st(n,'.');
+    /*for(int i=0;i<n;i++)
+    {
+        inp.push_back(st);
+        cout<<inp[i]<<endl;
+    }
+    */
+    inp.push_back("53.6789.2");
+    inp.push_back("672195348");
+    inp.push_back(".98342567");
+    inp.push_back("859761423");
+    inp.push_back("426853791");
+    inp.push_back("7139.4856");
+    inp.push_back("96.537284");
+    inp.push_back("287419635");    
+    inp.push_back("345286179");
+    
+    if(sudokosolver(n,inp))
+    {
+        for(int i=0;i<n;i++)
+        {
+            cout<<inp[i]<<endl;
+        }
+    }
+    
+    return 0;
+}

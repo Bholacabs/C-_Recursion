@@ -1,0 +1,91 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+void printsol(vector<string> inp,int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        cout<<inp[i]<<endl;
+    }
+}
+
+bool fillqueen(vector<string> inp, int i, int j, int n)
+{
+    int row=i;
+    int col=j;
+    
+    for(int a=col;a>=0;a--)
+    {
+        if(inp[row][a]=='1')
+        {
+            return false;
+        }
+    }
+    
+    int a=col;
+    int b=row;
+    for(; a>=0&&b<n; a--,b++)
+    {
+        if(inp[b][a]=='1')
+        {
+            return false;
+        }
+    }
+    
+    a=col;
+    b=row;
+    for(;a>=0&&b>=0;a--,b--)
+    {
+        if(inp[b][a]=='1')
+        {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+void nQueens(int j,vector<string> inp, int n)
+{
+    if(j==n)
+    {
+        //solution true
+        printsol(inp,n);
+        cout<<endl;
+        return;
+    }
+    
+    for(int i=0;i<n;i++)
+    {
+        if(fillqueen(inp,i,j,n))
+        {
+            // fill queen in
+            inp[i][j]='1';
+            
+            nQueens(j+1,inp,n);
+            
+            // take queen out
+            inp[i][j]='0';
+        }
+    }
+    
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    vector<string> inp;
+    string st(n,'0');
+    for(int i=0;i<n;i++)
+    {
+        inp.push_back(st);
+    }
+    int j=0;
+    cout<<endl;
+    
+    nQueens(j,inp,n);
+    
+    return 0;
+}

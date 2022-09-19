@@ -1,0 +1,19 @@
+1. What is Recursion ?
+1. When a function calls itself 
+   UNTILL a special condition is met.
+   
+   Recursion continues till its meets a stop condition.
+
+2. What is stack overflow in Recursion ?
+2. Stack-overflow is when 
+
+3. What is Base condition ?
+3.
+
+4. What is Recursion tree ?
+4. 
+
+5. What is Backtracking (Do recursion without doing +1 or -1) ? 
+5. 
+
+6. Time comlpexity and Space complexity

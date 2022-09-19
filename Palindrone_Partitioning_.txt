@@ -1,0 +1,69 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+bool palindrome(string st)
+{
+    string nst="";
+    for(int i=st.length()-1;i>=0;i--)
+    {
+        nst=nst+st[i];
+    }
+    if(nst==st)
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+void partition_palindrome(int n, string st, vector<string> out, set<string> &ans)
+{
+    if(n==0)
+    {
+        for(auto it:out)
+        {
+            ans.insert(it);
+        }
+        return;
+    }
+    
+    for(int i=0;i<n;i++)
+    {
+        string st1=st.substr(0,i+1);
+        string st2=st.substr(i+1,n-(i+1));
+        if(palindrome(st1))
+        {
+            out.push_back(st1);
+            int k=st2.length();
+            partition_palindrome(k,st2,out,ans);
+            out.pop_back();
+        }
+    }
+    
+}
+
+int main()
+{
+    string st;
+    cin>>st;
+    
+    int n=st.length();
+    vector<string> out;
+    set<string> ans;
+    partition_palindrome(n,st,out,ans);
+    
+    for(auto it:ans)
+    {
+        cout<<it<<" ";
+    }
+    
+    return 0;
+}
+
+
+
+
+
+
+

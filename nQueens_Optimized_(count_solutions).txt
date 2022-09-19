@@ -1,0 +1,66 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+void printsol(vector<string> board, int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			if(board[i][j]=='1')
+			{
+				cout<<"{"<<i+1<<"-"<<j+1<<"}"<<" ";
+			}
+		}
+	}
+	cout<<" ";
+	return;
+}
+
+int nQueens(int i, int n, vector<string> board, int vis1[], int vis2[], int vis3[])
+{
+	int count=0;
+	if(i==n)
+	{
+		printsol(board,n);
+		return 1;
+	}
+
+	for(int j=0;j<n;j++)
+	{
+		if(vis1[j]==0 && vis2[(n-1)-(i-j)]==0 && vis3[i+j]==0)
+		{
+			vis1[j]=1;
+			vis2[(n-1)-(i-j)]=1;
+			vis3[i+j]=1;
+			board[i][j]='1';
+			count=count+nQueens(i+1,n,board,vis1,vis2,vis3);
+			vis1[j]=0;
+			vis2[(n-1)-(i-j)]=0;
+			vis3[i+j]=0;
+			board[i][j]='0';
+		}
+	}
+	return count;
+}
+
+int main() {
+
+	int n;
+	cin>>n;
+	vector<string> board;
+	string st(n,'0');
+	for(int i=0;i<n;i++)
+	{
+		board.push_back(st);
+	}
+	int vis1[n]={};
+	int vis2[2*n-1]={};
+	int vis3[2*n-1]={};
+
+	int c=nQueens(0,n,board,vis1,vis2,vis3);
+    cout<<endl<<c;
+
+	return 0;
+}

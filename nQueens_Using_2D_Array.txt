@@ -1,0 +1,92 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+const int k=100;
+
+void printsol(int arr[][k],int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            cout<<arr[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+}
+
+bool fillqueen(int arr[][k], int i, int j, int n)
+{
+    int row=i;
+    int col=j;
+    
+    for(int a=col;a>=0;a--)
+    {
+        if(arr[row][a]==1)
+        {
+            return false;
+        }
+    }
+    
+    int a=col;
+    int b=row;
+    for(; a>=0&&b<n; a--,b++)
+    {
+        if(arr[b][a]==1)
+        {
+            return false;
+        }
+    }
+    
+    a=col;
+    b=row;
+    for(;a>=0&&b>=0;a--,b--)
+    {
+        if(arr[b][a]==1)
+        {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+void nQueens(int j,int arr[][k], int n)
+{
+    if(j==n)
+    {
+        //solution true
+        printsol(arr,n);
+        cout<<endl;
+        return;
+    }
+    
+    for(int i=0;i<n;i++)
+    {
+        if(fillqueen(arr,i,j,n))
+        {
+            // fill queen in
+            arr[i][j]=1;
+            
+            nQueens(j+1,arr,n);
+            
+            // take queen out
+            arr[i][j]=0;
+        }
+        
+    }
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    int arr[k][k]={};
+    
+    int j=0;
+    cout<<endl;
+    
+    nQueens(j,arr,n);
+    
+    return 0;
+}

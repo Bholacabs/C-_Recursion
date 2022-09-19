@@ -1,0 +1,43 @@
+#include<iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+void subseq(int i,string out,int n,string st,vector <string> &vs)
+{
+	if(i==n)
+	{
+		vs.push_back(out);
+		//cout<<out<<endl;
+		return;
+	}
+
+	subseq(i+1,out,n,st,vs);
+	out=out+st[i];
+	subseq(i+1,out,n,st,vs);
+	out.pop_back();
+}
+
+int main() {
+
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		string st;
+		cin>>st;
+		int n=st.length();
+		int i=0;
+		string out="";
+		vector<string> vs;
+		subseq(i,out,n,st,vs);
+		sort(vs.begin(),vs.end());
+		for(auto it:vs)
+		{
+			cout<<it<<endl;
+		}
+		vs.clear();
+	}
+
+
+	return 0;
+}

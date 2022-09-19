@@ -1,0 +1,32 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+void subseq(int i,int out[],int arr[],int n)
+{
+    if(i>=n)
+    {
+        for(int a=0;a<=i;a++)
+        {
+            cout<<arr[a];
+        }
+        cout<<endl;
+    }
+    
+    out.push(arr[i]);
+    subseq(i+1,out,arr,n);
+    out.pop(arr[i]);
+    subseq(i+1,out,arr,n);
+}
+
+int main()
+{
+    int n;
+    n=3;
+    int arr[]={3,1,2};
+    int out[n];
+    
+    subseq(0,out,arr,n);
+    
+    return 0;
+}

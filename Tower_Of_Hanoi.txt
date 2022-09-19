@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int tower_of_hanoi(int n, char from, char to, char helper)
+{
+    if(n==0)
+    {
+        return 0;
+    }
+    
+    int l=tower_of_hanoi(n-1,from,helper,to);
+    cout<<"Move "<<n<<"th disc from T"<<from<<" to T"<<to<<endl;
+    int r=tower_of_hanoi(n-1,helper,to,from);
+    
+    return l+r+1;
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    
+    cout<<tower_of_hanoi(n,'1','3','2');
+    
+    return 0;
+}
